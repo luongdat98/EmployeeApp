@@ -1,0 +1,20 @@
+.poll-creation{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title{
+  margin: 30px 0px;
+}
+
+.creation-form{
+  border: 1px solid black;
+  width: 30%;
+  text-align: center;
+  padding: 56px 0px;
+}
+
+.space{
+  margin: 10px 0px;
+}

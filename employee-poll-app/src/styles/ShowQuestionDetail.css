@@ -1,0 +1,17 @@
+.title{
+  text-align: center;
+}
+
+.card-block{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card{
+  margin: 10px 10px !important;
+}
+
+.not-question{
+  font-weight: 500;
+  margin: 0px 20px;
+}
