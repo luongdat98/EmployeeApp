@@ -4,6 +4,7 @@ import { addAnswers } from "../../actions/questionActions";
 import { checkValue } from "../../Helper/helpers";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/PollDetail.css";
+import NotFound from "./NotFound";
 
 const PollDetail = (props) => {
   const { isAuthed, questions, users, authedUser, dispatch } = props;
@@ -11,8 +12,17 @@ const PollDetail = (props) => {
   const question = Object.values(questions).filter((q) => {
     return q.id === questionId;
   });
+  let voted = 0;
 
-  const voted =
+  if (question === null || question === undefined || question.length === 0) {
+    return (
+      <div>
+        <NotFound />
+      </div>
+    );
+  }
+
+  voted =
   question[0].optionOne.votes.includes(authedUser) ||
   question[0].optionTwo.votes.includes(authedUser);
 
@@ -21,15 +31,7 @@ const PollDetail = (props) => {
   if (!isAuthed) {
     return <Navigate to={`/login`} />;
   }
-  if (question === null || question === undefined) {
 
-    return (
-      <div>
-        <h2>Poll Page</h2>
-        <p>Not found question</p>
-      </div>
-    );
-  }
   const author = Object.values(users).filter(
     (user) => user.id === question[0].author
   );

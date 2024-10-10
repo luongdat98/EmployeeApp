@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { useState } from "react";
 import { loginUser } from "../../actions/authActions";
-import { Navigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/LoginPage.css";
 
@@ -11,7 +11,10 @@ const LoginPage = (props)=>{
   const [username, setUsername] = useState("sarahedo");
   const [password, setPassword] = useState("password123");
   const [status, setStatus] = useState(true);
-  
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const changeUsername = (e) => {
     setUsername(e.target.value);
   };
@@ -25,17 +28,16 @@ const LoginPage = (props)=>{
     props.dispatch(loginUser(username, password));
     setUsername("");
     setPassword("");
+    if(location.state?.from){
+      navigate(location.state.from)
+    }
     if(isAuthed){
-        setStatus(true)
+        setStatus(true);
     }
     else{
-      setStatus(false)
+      setStatus(false);
     }
   };
-
-  if (isAuthed) {
-    return <Navigate to={`/`}/>;
-  }
 
    return (
       <div className="form-signin">
